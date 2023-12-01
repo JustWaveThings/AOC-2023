@@ -15,11 +15,9 @@ const input = (await readFile('./inputData-Day1.txt')) // ~~ Update Day ~~ neede
 
 // in each element find the first and last digits in the string
 
-const example = ['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet'];
+// const example = ['1abc2', 'pqr3stu8vwx', 'a1b2c3d4e5f', 'treb7uchet'];
 
-const mappedInput = example.map(el => [...el]);
-
-const innerMappedInput = example.map(el => {
+const innerMappedInput = input.map(el => {
   const characters = [...el];
   let firstNum, lastNum;
 
@@ -41,4 +39,13 @@ const innerMappedInput = example.map(el => {
   }
   return [firstNum, lastNum];
 });
-console.log(innerMappedInput);
+
+// concat each inner array
+
+const concat = innerMappedInput.map(el => `${el[0]}${el[1]}`);
+
+// reduce array to get total
+
+const answer = concat.reduce((a, b) => Number(a) + Number(b), 0);
+
+console.log(answer);
