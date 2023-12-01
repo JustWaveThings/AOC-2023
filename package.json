@@ -1,0 +1,14 @@
+{
+  "name": "aoc-2023",
+  "version": "1.0.0",
+  "description": "Repo for my 2023 Advent of Code solutions. https://adventofcode.com/",
+  "main": "index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  }
+}
