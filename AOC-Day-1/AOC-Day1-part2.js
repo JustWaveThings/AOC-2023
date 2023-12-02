@@ -11,26 +11,80 @@ const input = (await readFile('./inputData-Day1.txt')) // ~~ Update Day ~~ neede
 // sanity check
 //console.log('\nSanity Check\n', '\nIs array: ', Array.isArray(input), '\nArray length: ', input.length, '\nFirst element: ', input.at(0), '\nLast element:', input.at(-1));
 
-// for reference https://adventofcode.com/2023/day/1
+// for reference https://adventofcode.com/2023/day/1#part2
 
-/* --- Part Two ---
-Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+const examplePart2 = ['two1nine', 'eightwothree', 'abcone2threexyz', 'xtwone3four', '4nineeightseven2', 'zoneight234', '7pqrstsixteen'];
 
-Equipped with this new information, you now need to find the real first and last digit on each line. For example:
+const spelledNums = [
+  {
+    value: 'one',
+    length: 3,
+    replacement: 1,
+  },
+  {
+    value: 'two',
+    length: 3,
+    replacement: 2,
+  },
+  {
+    value: 'three',
+    length: 5,
+    replacement: 3,
+  },
+  {
+    value: 'four',
+    length: 4,
+    replacement: 4,
+  },
+  {
+    value: 'five',
+    length: 4,
+    replacement: 5,
+  },
+  {
+    value: 'six',
+    length: 3,
+    replacement: 6,
+  },
+  {
+    value: 'seven',
+    length: 5,
+    replacement: 7,
+  },
+  {
+    value: 'eight',
+    length: 5,
+    replacement: 8,
+  },
+  {
+    value: 'nine',
+    length: 4,
+    replacement: 9,
+  },
+];
 
-two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen
-In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Adding these together produces 281.
+const innerMappedInput = examplePart2.map(string => {
+  // need to first check to see if there are any spelled numbers in the element, and if there is a match, get the index of the first letter,
+  const sortObjects = [];
+  spelledNums.forEach(obj => {
+    const key = obj.value;
 
-What is the sum of all of the calibration values? */
+    if (string.includes(key)) {
+      const foundNums = { [key]: string.indexOf(key[0]) };
+      sortObjects.push(foundNums);
+    }
+  });
 
-const innerMappedInput = input.map(el => {
-  const characters = [...el];
+  console.log(sortObjects);
+
+  // then, replace them with the number, then run it through part one's code
+
+  const sampleChars = [...string];
+  console.log(sampleChars);
+
+  // so working idea would be to iterate through each sample chars looking for a match on o t f s e n, and if theres a hit,
+
+  const characters = [...string];
   let firstNum, lastNum;
 
   for (let i = 0, j = characters.length - 1; i <= characters.length - 1; i++, j--) {
@@ -54,10 +108,10 @@ const innerMappedInput = input.map(el => {
 
 // concat each inner array
 
-const concat = innerMappedInput.map(el => `${el[0]}${el[1]}`);
+// const concat = innerMappedInput.map(el => `${el[0]}${el[1]}`);
 
 // reduce array to get total
 
-const answer = concat.reduce((a, b) => Number(a) + Number(b), 0);
+// const answer = concat.reduce((a, b) => Number(a) + Number(b), 0);
 
-console.log(answer);
+// console.log(answer);
